@@ -31,26 +31,28 @@ public class ContactReportInfo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long contactReportId;
 	
-//	@NotNull
+	@NotNull
 	private String dlrCd;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
-//	@NotNull
+	@NotNull
 	private LocalDate contactDt;
 
-//	@NotNull
+	@NotNull
 	private String contactLocation;
 
-//	@NotNull
+	@NotNull
 	private String contactType;
+
+	private String currentIssues;
 	
-//	@NotNull
+	@NotNull
 	private String contactAuthor;
 	
-//	@NotNull
+	@NotNull
 	private String contactReviewer;
 
-//	@NotNull
+	@NotNull
 	private int contactStatus;
 	
 	
@@ -73,5 +75,4 @@ public class ContactReportInfo {
 	@JoinColumn(name = "contactReportIdFk", referencedColumnName="contactReportId")
 	private List<ContactReportAttachment> attachment;
 
-	
 }

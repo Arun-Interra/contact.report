@@ -12,7 +12,7 @@ import mazda.field.portal.contact.report.entity.ContactReportInfo;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ReportSubmissionDto {
+public class ContactReportInfoDto {
 
-	private ContactReportInfo contactReportInfo;
+	private ContactReportInfo contactReport;
 }

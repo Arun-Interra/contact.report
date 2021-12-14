@@ -14,7 +14,7 @@ public class ContactReportIssueStatusDto {
 	private String dlrCd;
 	private long contactReportId;
 	private int contactStatus;
-	private String topic;
+	private String currentIssues;
 	
 	
 }
