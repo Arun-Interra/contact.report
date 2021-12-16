@@ -16,11 +16,9 @@ public interface ContactReportService {
 
      ContactReportInfoDto findByContactReportId(long ContactreporId);
 
-     List<ContactInfoDto> findByDlrCd(String dlrCd);
+//     List<ContactReportIssueStatusDto> getContactReportByStatusIssues(String rgnCd);
 
-     List<ContactReportIssueStatusDto> getContactReportByStatusIssues(String rgnCd);
-
-     String updateDraftReport(ContactReportInfoDto report);
+//     String updateDraftReport(ContactReportInfoDto report);
 
      void deleteReportById(long contactReportId);
 }

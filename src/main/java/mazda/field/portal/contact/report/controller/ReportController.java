@@ -1,5 +1,6 @@
 package mazda.field.portal.contact.report.controller;
 
+import mazda.field.portal.contact.report.Service.ContactInfoServiceImpl;
 import mazda.field.portal.contact.report.Service.ContactReportServiceImpl;
 import mazda.field.portal.contact.report.dto.ContactInfoDto;
 import mazda.field.portal.contact.report.dto.ContactReportIssueStatusDto;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/MFP/ContactReport")
+@RequestMapping(path="/ContactReport")
 public class ReportController {
 
 	@Autowired(required = true)
@@ -28,10 +29,10 @@ public class ReportController {
 		return contactReportService.submitReportData(report);
 	}
 
-	@PostMapping(value ="/updateReport")
-	public String updateReportData(@Valid @RequestBody ContactReportInfoDto report) {
-		return contactReportService.updateDraftReport(report);
-	}
+//	@PostMapping(value ="/updateReport")
+//	public String updateReportData(@Valid @RequestBody ContactReportInfoDto report) {
+//		return contactReportService.updateDraftReport(report);
+//	}
 
 
 	@PostMapping(value = "/deleteReportById")
@@ -42,16 +43,5 @@ public class ReportController {
 	@GetMapping(value = "/getReportById/{contactReportId}")
 	public ContactReportInfoDto getReportById(@PathVariable long contactReportId) {
 		return contactReportService.findByContactReportId(contactReportId);
-	}
-
-	@GetMapping(value = "/getDlrReport/{dlrCd}")
-	public List<ContactInfoDto> getDlrReport(@PathVariable String dlrCd) {
-		return contactReportService.findByDlrCd(dlrCd);
-	}
-
-	@GetMapping(value = "/getReportByStatusIssues/{rgnCd}")
-	public List<ContactReportIssueStatusDto> getReport(@PathVariable String rgnCd) {
-
-		return contactReportService.getContactReportByStatusIssues(rgnCd);
 	}
 }

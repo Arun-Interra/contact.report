@@ -45,16 +45,10 @@ public class ContactReportServiceImpl implements ContactReportService{
         return ContactInfoMapper.INSTANCE.CRInfoToCIDtoList(DtoList);
     }
 
-    public List<ContactReportIssueStatusDto> getContactReportByStatusIssues(String rgnCd) {
-        return contactInfoRepository.getContactReportByStatusIssues(rgnCd);
-    }
+//    public List<ContactReportIssueStatusDto> getContactReportByStatusIssues(String rgnCd) {
+//        return contactInfoRepository.getContactReportByStatusIssues(rgnCd);
+//    }
 
-    public String updateDraftReport(ContactReportInfoDto report){
-        String updateStatus = "Unable to update report";
-        long contactReportId= report.getContactReport().getContactReportId();
-        contactInfoRepository.updateContactReportById(report.getContactReport(), contactReportId);
-        return updateStatus;
-    }
 
     @Transactional
     public void deleteReportById(long contactReportId){
