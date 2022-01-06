@@ -1,20 +1,18 @@
 package mazda.field.portal.contact.report.dto;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import mazda.field.portal.contact.report.entity.ContactReportInfo;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ContactReportIssueStatusDto {
-	
-	private String dlrCd;
-	private long contactReportId;
-	private int contactStatus;
-	private String currentIssues;
-	
-	
+public class ContactReportDto {
+
+	private ContactReportInfo contactReport;
 }

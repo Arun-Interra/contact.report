@@ -2,18 +2,17 @@ package mazda.field.portal.contact.report.repository;
 
 import java.util.List;
 
+import mazda.field.portal.contact.report.dto.ContactReportByDealershipDto;
 import mazda.field.portal.contact.report.dto.ContactReportByIssuesDto;
-import mazda.field.portal.contact.report.dto.ContactReportInfoDto;
-import mazda.field.portal.contact.report.dto.ContactReportIssueStatusDto;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import mazda.field.portal.contact.report.entity.ContactReportInfo;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Repository
 @PropertySource("classpath:/appSql.properties")
@@ -25,38 +24,14 @@ public interface ContactInfoRepository extends JpaRepository<ContactReportInfo, 
 
 	public ContactReportInfo findByContactReportId(@Param("contactReportId") long contactReportId);
 
-	@Query(value = "select * from mfp_db.mfp_contact_report_info where dlr_cd=:dlrCd and current_issues  in :issues", nativeQuery = true)
-	public List<ContactReportInfo> findByDlrCd(@Param("dlrCd") String dlrCd, @Param("issues") List<String> issues);
+@Query(value = "SELECT new mazda.field.portal.contact.report.dto.ContactReportByDealershipDto" +
+		"(d.rgnCd, d.zoneCd, d.districtCd, cr.dlrCd, d.dlrNm, cr.contactReportId, cr.contactDt, cr.contactAuthor,cr.contactStatus,cr.currentIssues) " +
+		"FROM Dealers d JOIN d.CRI cr WHERE cr.currentIssues IN :currentIssues AND cr.dlrCd=:dlrCd")
+	public List<ContactReportByDealershipDto> findByDlrCd(@Param("dlrCd") String dlrCd, @Param("currentIssues") List<String> currentIssues);
 
 	public void deleteByContactReportIdAndContactStatus(@Param("contactReportId") long contactReportId, int contactStatus);
 
 	public List<ContactReportInfo> findByDlrCd(String dlrCd);
 
-	@Query(value = "SELECT new mazda.field.portal.contact.report.dto.ContactReportByIssuesDto" +
-			"(d.RGN_CD, d.ZONE_CD, d.DISTRICT_CD, cr.dlrCd, d.DBA_NM, cr.contactReportId, cr.currentIssues) " +
-			"FROM Dealers d JOIN d.CRI cr WHERE cr.currentIssues IN :currentIssues")
-	public List<ContactReportByIssuesDto> findBycurrentIssues(@Param("currentIssues") List<String> currentIssues);
-
-	@Query(value = "SELECT new mazda.field.portal.contact.report.dto.ContactReportByIssuesDto" +
-			"(d.RGN_CD, d.ZONE_CD, d.DISTRICT_CD, cr.dlrCd, d.DBA_NM, cr.contactReportId, cr.currentIssues) " +
-			"FROM Dealers d JOIN d.CRI cr WHERE cr.dlrCd=:dlrCd and cr.currentIssues IN :currentIssues")
-	public List<ContactReportByIssuesDto> findBycurrentIssuesAndDlrCd(@Param("dlrCd") String dlrCd, @Param("currentIssues") List<String>currentIssues);
-
-	@Query(value = "SELECT new mazda.field.portal.contact.report.dto.ContactReportByIssuesDto" +
-			"(d.RGN_CD, d.ZONE_CD, d.DISTRICT_CD, cr.dlrCd, d.DBA_NM, cr.contactReportId, cr.currentIssues) " +
-			"FROM Dealers d JOIN d.CRI cr WHERE d.RGN_CD=:rgnCd and cr.currentIssues IN :currentIssues")
-	public List<ContactReportByIssuesDto> findBycurrentIssuesAndRgnCd(@Param("rgnCd") String rgnCd, @Param("currentIssues") List<String> currentIssues);
-
-	@Query(value = "SELECT new mazda.field.portal.contact.report.dto.ContactReportByIssuesDto" +
-			"(d.RGN_CD, d.ZONE_CD, d.DISTRICT_CD, cr.dlrCd, d.DBA_NM, cr.contactReportId, cr.currentIssues) " +
-			"FROM Dealers d JOIN d.CRI cr WHERE d.RGN_CD=:rgnCd and  d.ZONE_CD=:zoneCd and cr.currentIssues IN :currentIssues")
-	public List<ContactReportByIssuesDto> findBycurrentIssuesAndRgnCdAndZoneCd(
-			@Param("rgnCd") String rgnCd, @Param("zoneCd") String zoneCd, @Param("currentIssues") List<String> currentIssues);
-
-	@Query(value = "SELECT new mazda.field.portal.contact.report.dto.ContactReportByIssuesDto" +
-			"(d.RGN_CD, d.ZONE_CD, d.DISTRICT_CD, cr.dlrCd, d.DBA_NM, cr.contactReportId, cr.currentIssues) " +
-			"FROM Dealers d JOIN d.CRI cr WHERE d.RGN_CD=:rgnCd and d.RGN_CD=:rgnCd and d.ZONE_CD=:zoneCd and d.DISTRICT_CD=:districtCd and cr.currentIssues IN :currentIssues")
-	public List<ContactReportByIssuesDto> findBycurrentIssuesAndRgnCdAndZoneCdAndDistirctCd(
-			@Param("rgnCd") String rgnCd, @Param("zoneCd") String zoneCd, @Param("districtCd") String districtCd, @Param("currentIssues") List<String> currentIssues);
 }
 	

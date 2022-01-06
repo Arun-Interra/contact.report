@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @ToString
-public class ContactReportFilterDto {
+public class FilterCriteria {
 
     private String rgnCd;
 

@@ -1,10 +1,8 @@
 package mazda.field.portal.contact.report.Service;
 
 import mazda.field.portal.contact.report.Mapper.ContactInfoMapper;
-import mazda.field.portal.contact.report.Mapper.ContactReportIssueStatusMapper;
-import mazda.field.portal.contact.report.dto.ContactInfoDto;
-import mazda.field.portal.contact.report.dto.ContactReportInfoDto;
-import mazda.field.portal.contact.report.dto.ContactReportIssueStatusDto;
+import mazda.field.portal.contact.report.dto.ContactReportByDealershipDto;
+import mazda.field.portal.contact.report.dto.ContactReportDto;
 import mazda.field.portal.contact.report.entity.ContactReportInfo;
 import mazda.field.portal.contact.report.repository.ContactInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,7 @@ public class ContactReportServiceImpl implements ContactReportService{
     private ContactInfoRepository contactInfoRepository;
 
 
-    public String submitReportData(ContactReportInfoDto report) {
+    public String submitReportData(ContactReportDto report) {
         String submission = "Unable to save contact report";
         try {
             if(report.getContactReport().getMetrics().size() > 0 &&
@@ -34,21 +32,16 @@ public class ContactReportServiceImpl implements ContactReportService{
         return submission;
     }
 
-    public ContactReportInfoDto findByContactReportId(long ContactreporId) {
-        ContactReportInfoDto contactReportInfoDto = new ContactReportInfoDto();
-        contactReportInfoDto.setContactReport(contactInfoRepository.findByContactReportId(ContactreporId));
-        return contactReportInfoDto;
+    public ContactReportDto findByContactReportId(long ContactreporId) {
+        ContactReportDto contactReportDto = new ContactReportDto();
+        contactReportDto.setContactReport(contactInfoRepository.findByContactReportId(ContactreporId));
+        return contactReportDto;
     }
 
-    public List<ContactInfoDto> findByDlrCd(String dlrCd) {
+    public List<ContactReportByDealershipDto> findByDlrCd(String dlrCd) {
         List<ContactReportInfo> DtoList = contactInfoRepository.findByDlrCd(dlrCd);
         return ContactInfoMapper.INSTANCE.CRInfoToCIDtoList(DtoList);
     }
-
-//    public List<ContactReportIssueStatusDto> getContactReportByStatusIssues(String rgnCd) {
-//        return contactInfoRepository.getContactReportByStatusIssues(rgnCd);
-//    }
-
 
     @Transactional
     public void deleteReportById(long contactReportId){

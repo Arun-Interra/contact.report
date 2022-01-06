@@ -1,9 +1,11 @@
 package mazda.field.portal.contact.report.Security;
 
-import mazda.field.portal.contact.report.dto.ContactInfoDto;
-import mazda.field.portal.contact.report.dto.ContactReportByIssuesDto;
+import mazda.field.portal.contact.report.dto.FilterCriteria;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.Predicate;
 
 public interface ValidationCheck {
 
-     String RgnZoneDist(ContactReportByIssuesDto contactReportByIssuesDto);
+     Predicate RgnZoneDist(EntityManager em, FilterCriteria filterCriteria);
 }

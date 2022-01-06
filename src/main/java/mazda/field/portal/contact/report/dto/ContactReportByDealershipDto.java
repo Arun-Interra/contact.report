@@ -1,7 +1,6 @@
 package mazda.field.portal.contact.report.dto;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,11 +11,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ContactInfoDto {
+public class ContactReportByDealershipDto {
+
+	private String rgnCd;
+
+	private String zoneCd;
+
+	private String districtCd;
+
+	private String dlrCd;
+
+	private String dlrNm;
 
 	private long contactReportId;
-	
-	private String dlrCd;
 	
 	private LocalDate contactDt;
 	

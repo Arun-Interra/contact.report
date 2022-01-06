@@ -1,10 +1,6 @@
 package mazda.field.portal.contact.report.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -26,6 +24,6 @@ public class ContactReportDealerPersonnel {
 	private long personnelId;
 
     @NotNull
-	private String dealerContacts;  
+	private String personnelIdCd;
 
 }

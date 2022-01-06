@@ -3,14 +3,7 @@ package mazda.field.portal.contact.report.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -59,12 +52,12 @@ public class ContactReportInfo {
 
 	@OneToMany(targetEntity = ContactReportDealerPersonnel.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="contactReportIdFk", referencedColumnName="contactReportId", nullable = false)
-//	@NotNull
+	@NotNull
 	private List<ContactReportDealerPersonnel> dealerpersonnel;
 
 	@OneToMany(targetEntity = ContactReportMetrics.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="contactReportIdFk", referencedColumnName="contactReportId", nullable = false)
-//	@NotNull
+	@NotNull
 	private List<ContactReportMetrics> metrics;
 	
 	@OneToMany(targetEntity = ContactReportDiscussion.class, cascade = CascadeType.ALL)
@@ -74,5 +67,10 @@ public class ContactReportInfo {
 	@OneToMany(targetEntity = ContactReportAttachment.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "contactReportIdFk", referencedColumnName="contactReportId")
 	private List<ContactReportAttachment> attachment;
+
+//	@ManyToOne(targetEntity = Dealers.class, cascade = CascadeType.ALL)
+//	@JoinColumn(name="dlrCd", updatable = false, insertable = false)
+//	@NotNull
+//	private Dealers dealers;
 
 }

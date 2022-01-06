@@ -1,4 +1,4 @@
-package mazda.field.portal.contact.report.Config;
+package mazda.field.portal.contact.report.config;
 
 import mazda.field.portal.contact.report.Service.CustomUserDetailsService;
 import mazda.field.portal.contact.report.filter.JwtFilter;
@@ -52,9 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);;
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers(HttpMethod.GET);
-//        //antMatchers("/MFP/ContactReport/submitReport")
-//    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers();
+        //antMatchers("/MFP/ContactReport/submitReport")
+    }
 }
