@@ -1,16 +1,12 @@
 package mazda.field.portal.contact.report.Security;
 
-import mazda.field.portal.contact.report.dto.ContactReportByIssuesDto;
+import mazda.field.portal.contact.report.dto.ReportByIssuesDto;
 import mazda.field.portal.contact.report.dto.FilterCriteria;
 import mazda.field.portal.contact.report.entity.ContactReportInfo;
 import mazda.field.portal.contact.report.entity.Dealers;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
 
-import javax.persistence.PersistenceUnit;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -27,7 +23,7 @@ public class ValidationCheckImpl implements ValidationCheck{
     public Predicate RgnZoneDist(EntityManager em, FilterCriteria filterCriteria) {
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<ContactReportByIssuesDto> query = cb.createQuery(ContactReportByIssuesDto.class);
+        CriteriaQuery<ReportByIssuesDto> query = cb.createQuery(ReportByIssuesDto.class);
 
         String region = filterCriteria.getRgnCd();
         String zone = filterCriteria.getZoneCd();

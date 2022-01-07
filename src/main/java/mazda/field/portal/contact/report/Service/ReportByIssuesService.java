@@ -1,12 +1,10 @@
 package mazda.field.portal.contact.report.Service;
 
 
-import mazda.field.portal.contact.report.dto.ContactReportByIssuesDto;
+import mazda.field.portal.contact.report.dto.ReportByIssuesDto;
 import mazda.field.portal.contact.report.dto.FilterCriteria;
 import mazda.field.portal.contact.report.entity.ContactReportInfo;
 import mazda.field.portal.contact.report.entity.Dealers;
-import mazda.field.portal.contact.report.repository.ContactInfoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -26,10 +24,10 @@ public class ReportByIssuesService {
    @PersistenceContext
    public EntityManager em;
 
-   public List<ContactReportByIssuesDto> getReportByIssues(FilterCriteria filterCriteria) {
+   public List<ReportByIssuesDto> findReportByIssues(FilterCriteria filterCriteria) {
 
          CriteriaBuilder cb = em.getCriteriaBuilder();
-         CriteriaQuery<ContactReportByIssuesDto> query = cb.createQuery(ContactReportByIssuesDto.class);
+         CriteriaQuery<ReportByIssuesDto> query = cb.createQuery(ReportByIssuesDto.class);
 
          String region = filterCriteria.getRgnCd();
          String zone = filterCriteria.getZoneCd();
@@ -64,7 +62,7 @@ public class ReportByIssuesService {
          query = query.multiselect(d.get("rgnCd"), d.get("zoneCd"), d.get("districtCd"), d.get("dlrCd"),
                  d.get("dlrNm"), cr.get("contactReportId"), cr.get("currentIssues"), cr.get("contactStatus")).where(predicates.toArray(new Predicate[0]));
 
-         TypedQuery<ContactReportByIssuesDto> tq = em.createQuery(query);
+         TypedQuery<ReportByIssuesDto> tq = em.createQuery(query);
 
          return tq.getResultList();
 

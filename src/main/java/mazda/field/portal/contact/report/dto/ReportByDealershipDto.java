@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ContactReportByDealershipDto {
+public class ReportByDealershipDto {
 
 	private String rgnCd;
 

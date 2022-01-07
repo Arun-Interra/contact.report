@@ -1,7 +1,7 @@
 package mazda.field.portal.contact.report.Service;
 
 import mazda.field.portal.contact.report.Mapper.ContactInfoMapper;
-import mazda.field.portal.contact.report.dto.ContactReportByDealershipDto;
+import mazda.field.portal.contact.report.dto.ReportByDealershipDto;
 import mazda.field.portal.contact.report.dto.ContactReportDto;
 import mazda.field.portal.contact.report.entity.ContactReportInfo;
 import mazda.field.portal.contact.report.repository.ContactInfoRepository;
@@ -38,7 +38,7 @@ public class ContactReportServiceImpl implements ContactReportService{
         return contactReportDto;
     }
 
-    public List<ContactReportByDealershipDto> findByDlrCd(String dlrCd) {
+    public List<ReportByDealershipDto> findByDlrCd(String dlrCd) {
         List<ContactReportInfo> DtoList = contactInfoRepository.findByDlrCd(dlrCd);
         return ContactInfoMapper.INSTANCE.CRInfoToCIDtoList(DtoList);
     }

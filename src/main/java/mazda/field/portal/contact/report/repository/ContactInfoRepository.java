@@ -2,10 +2,9 @@ package mazda.field.portal.contact.report.repository;
 
 import java.util.List;
 
-import mazda.field.portal.contact.report.dto.ContactReportByDealershipDto;
-import mazda.field.portal.contact.report.dto.ContactReportByIssuesDto;
+import mazda.field.portal.contact.report.dto.ReportByDealershipDto;
 
-import org.springframework.beans.factory.annotation.Value;
+import mazda.field.portal.contact.report.dto.ReportByMonthDto;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,10 +23,10 @@ public interface ContactInfoRepository extends JpaRepository<ContactReportInfo, 
 
 	public ContactReportInfo findByContactReportId(@Param("contactReportId") long contactReportId);
 
-@Query(value = "SELECT new mazda.field.portal.contact.report.dto.ContactReportByDealershipDto" +
+@Query(value = "SELECT new mazda.field.portal.contact.report.dto.ReportByDealershipDto" +
 		"(d.rgnCd, d.zoneCd, d.districtCd, cr.dlrCd, d.dlrNm, cr.contactReportId, cr.contactDt, cr.contactAuthor,cr.contactStatus,cr.currentIssues) " +
 		"FROM Dealers d JOIN d.CRI cr WHERE cr.currentIssues IN :currentIssues AND cr.dlrCd=:dlrCd")
-	public List<ContactReportByDealershipDto> findByDlrCd(@Param("dlrCd") String dlrCd, @Param("currentIssues") List<String> currentIssues);
+	public List<ReportByDealershipDto> findByDlrCd(@Param("dlrCd") String dlrCd, @Param("currentIssues") List<String> currentIssues);
 
 	public void deleteByContactReportIdAndContactStatus(@Param("contactReportId") long contactReportId, int contactStatus);
 

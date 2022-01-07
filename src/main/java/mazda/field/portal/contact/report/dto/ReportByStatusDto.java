@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ContactReportByStatusDto {
+public class ReportByStatusDto {
 	
 	private String dlrCd;
 	private long contactReportId;
